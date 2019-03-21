@@ -1,0 +1,53 @@
+﻿@page
+@model YLink.WebAdmin.Pages.Links.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Link[0].Key)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Link[0].Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Link[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Link[0].Modified)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Link) {
+        <tr>
+            <td>
+                <a href="@Model.GetUrl(item)">@item.Key</a></td>
+            <td>
+                <a href="@item.Url"></a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modified)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
