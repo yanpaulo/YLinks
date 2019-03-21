@@ -25,7 +25,8 @@ namespace YLinks.Services
         public Task<AuthorizationPolicy> GetDefaultPolicyAsync()
         {
             AuthorizationPolicy policy;
-            if (_context.HttpContext.Request.Path.StartsWithSegments("/Links") && !_environment.IsDevelopment())
+            PathString path = _context.HttpContext.Request.Path;
+            if (!_environment.IsDevelopment() && (path.StartsWithSegments("/Links") || path.StartsWithSegments("/Identity/Account/Register")))
             {
                 policy = adminPolicy;
             }
